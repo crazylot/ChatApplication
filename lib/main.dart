@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       theme: ThemeData(primarySwatch: Colors.yellow),
-        home: chatpage(),
+       theme: ThemeData(primarySwatch: Colors.deepPurple),
+        home: LoginPage(),
     );
   }
 }
