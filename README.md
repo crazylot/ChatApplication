@@ -2,32 +2,33 @@
 
 The starting point of this application is a login page. After successfully signing in, it redirects you to a chat window where you can add image and text along with it. Through this project, I have learned about development of application using flutter and implementation of CI/CD activities for this project using Jenkins.
 
-# Implementation of CI/CD process
-## Step1: Deploy a Jenkins Server which is accessible via public url
+# GitHub Releases
+  They are deliverables that you can make it availble for your users/testers to download and use them. Github Releases can be seen at the right side of the list of files.
 
-  Create a Virtual Machine in Azure or with any other cloud provider to host your jenkins server. 
-  Microsoft has a great article on how to install Jenkins on Azure Linux Virtual Machine.
-  You can refer it here :- https://learn.microsoft.com/en-us/azure/developer/jenkins/configure-on-linux-vm
+# GitHub Action
+  GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. You can create 
+  workflows that build and test every pull request to your repository, or deploy merged pull requests to production. GitHub Action creates a new virtual machine and install 
+  all the software you have specified in your main.yml file everytime you create a new push/pull event.
+
+# Implementation of CI/CD Process using GitHub Action
+## Step 1: Create a main.yml file
+   Create a directory by the name of ".github" and then create a subdirectory of the name "workflows" in it. Create a file in this directory called as main.yml file.
+## Step 2: Define Steps and Jobs for that you want to automate in the main.yml file
+## Step 3: Create a Personal Access Token
+   **A personal access token is needed to authenticate yourself to github action.** Personal Access Token are intented to access github resources on your behalf.
+   Go to **Settings >> Developer Settings >> Personal access token**. Generate a token(classic) by providing basic repo permission.
+## Step 4: Add the Token Generated to secrets of your github repo
+   Go to the settings of your github repository. Under Security, you will find option for "Secrets and variables". Go to Actions and create a new repository token by 
+   the name of *"TOKEN"*. This name is used because we have configured the same name for our token in main.yml file. Paste your Personal Token in the secret input field.
+   Click on "Add Secret"
+
+Now everytime I create a push event for my master branch, the workflow is triggered which test, build and finally release a new version of the app to the github releases.
+
+
+Github Releases consists of APK file for 3 different targetted ABI (Appication Binary Inteface).
+You can download the APK file from here which can be installed on your android device.
+   
+   
+   
+
   
-  Things that were not covered are listed here:-
-  
-    a. To create a new file in cloudshell, type following command ->  cd . > cloud-init-jenkins.txt 
-    
-    b. To write into the file created, type following command  ->  echo '#cloud-config 
-                                                                                     package_upgrade: true
-                                                                                    runcmd:
-                                                                                        - sudo apt install openjdk-11-jre -y
-                                                                                        - curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee 
-                                                                                           /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-                                                                                        -  echo 'deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] 
-                                                                                           https://pkg.jenkins.io/debian-stable binary/' | sudo tee 
-                                                                                           /etc/apt/sources.list.d/jenkins.list > /dev/null
-                                                                                        - sudo apt-get update && sudo apt-get install jenkins -y
-                                                                                        - sudo service jenkins restart' > cloud-init-jenkins.txt
-      This will not only print the text between single quotes but also push down the output into our cloud-init-jenkins.txt file 
-          
-
-
-
-
-
